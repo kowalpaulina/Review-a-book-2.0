@@ -1,0 +1,177 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+//my code
+
+$font-family: "Lato", sans-serif;
+$h1: 140%;
+$h2: 120%;
+$mainColor: #084C61;
+$secondColor: #70C1B3;
+$thirdColor: #5DA095;
+$accentColor: #E3B505;
+$brightColor:#EEEBD0;
+
+body{
+    font-family: $font-family;
+    background-color: $mainColor;
+    color: $brightColor;
+}
+
+header{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid $thirdColor;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    
+    h2{
+        margin-top: 10px;
+    }
+}
+
+h1{
+    font-size: $h1;}
+
+h2{
+    font-size: $h2;
+    padding: 10px 0;}
+
+.review{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.half-box{
+    border: 1px solid $mainColor;
+    margin-top: 20px;
+}
+
+form, .review-list{
+   @extend .half-box;
+}
+
+form{
+    width: 35%;
+}
+
+.review-list{
+    width: 50%;
+}
+
+.row{
+    margin-top: 15px;
+    
+    input{
+        display: block;
+        box-sizing: border-box;
+        margin-top: 10px;
+        width: 100%;
+        padding:5px;
+        font-family: $font-family;}
+}
+
+.error {
+    color: $brightColor;
+    font-size: 90%;
+    margin-top: 10px;
+    display: none;
+}
+
+fieldset:last-of-type{
+    margin-top: 25px;
+}
+
+textarea{
+    font-family: $font-family;
+    margin-top: 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+button{
+    padding: 9px;
+    background-color: $thirdColor;
+    color: $brightColor;
+    outline: none;
+    border: none;
+    width: 35%;
+    float: right;
+    margin-top: 20px;
+}
+
+//section
+
+article{
+    margin-top: 15px;
+    background-color: $secondColor;
+    line-height: 1.7em;
+    text-align: justify;
+    padding: 10px;
+}
+
+ul{
+    background-color: $thirdColor;
+    display: flex;
+    justify-content: space-between;
+}
+    
+li{
+    //display: inline-block;
+    margin: 0 10px;
+    }
+
+
+
+
+
+
