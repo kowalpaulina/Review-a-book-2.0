@@ -1,6 +1,9 @@
 $(document).ready(function(){
     $("#opinions").load("showopinions.php");
     listener();
+	$.ajaxSetup({
+      cache:false
+    });
 });
 
 function listener(){
@@ -19,6 +22,7 @@ function validate(){
     $('.error p').remove();    
 $.ajax({
         type:"POST",
+	    cache: false,
         dataType:'json',
         url:"validate.php",
         data:{fname:fname,lname:lname,email:email, message:message}
@@ -55,6 +59,7 @@ $.ajax({
 function addOpinionToDB(){
     request = "";
     request = new XMLHttpRequest();
+    request.msCaching = 'enabled';
     var fname = escape($("#fname").val());
     var lname = escape($("#lname").val());
     var email = escape($("#email").val());
@@ -69,7 +74,6 @@ function addOpinionToDB(){
 }         
 function contentAdd(){
     if(request.readyState == 4 && request.status == 200){
-        document.getElementById("opinions").innerHTML = request.responseText;  
         $("#opinions").load("showopinions.php");
 	}
 }
