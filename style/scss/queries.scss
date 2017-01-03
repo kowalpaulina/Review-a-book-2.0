@@ -1,0 +1,40 @@
+@media screen and(max-width: 750px){
+    .review{
+        flex-direction: column;
+    
+        .form, .review-list{
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        .review-list{
+            margin-top: 5%;
+        }
+    }
+    
+    h1{
+        font-size: 120%;
+    }
+    
+    h2{
+        font-size: 100%;
+    }
+}
+
+@media screen and(max-width: 600px){
+    ul{
+        flex-direction: column;
+    }
+}
+
+
+@media screen and(max-width: 300px){
+    h1{
+        line-height: 1.7em;
+        padding-left: 10px;
+    }
+    
+    header{
+        height: 130px;
+    }
+}

@@ -55,7 +55,7 @@ header {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #5DA095;
-  height: 80px;
+  height: 100px;
   justify-content: center;
   align-items: center; }
   header h2 {
@@ -74,11 +74,11 @@ h2 {
   flex-direction: row;
   padding-bottom: 15px; }
 
-.half-box, form, .review-list {
+.half-box, .form, .review-list {
   border: 1px solid #084C61;
   margin-top: 20px; }
 
-form {
+.form {
   width: 35%; }
 
 .review-list {
@@ -91,7 +91,7 @@ form {
     box-sizing: border-box;
     margin-top: 10px;
     width: 100%;
-    padding: 5px;
+    padding: 8px;
     font-family: "Lato", sans-serif; }
 
 .error {
@@ -117,7 +117,8 @@ button {
   border: none;
   width: 35%;
   float: right;
-  margin-top: 20px; }
+  margin-top: 20px;
+  font-family: "Lato", sans-serif; }
 
 article {
   margin-top: 15px;
