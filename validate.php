@@ -1,50 +1,55 @@
 <?php
 include("functions.php");
 
-    $fname='';
-    $lname = '';
-    $email = '';
-    $message = '';
-    $gender = '';
-    $error = array();
-           
-    //fname validation
-    if(isset($_POST['fname'])){
-        if(trim($_POST['fname'])==''){
-            $error['fname'] = "Uzupełnij imię!";    
-        }else{
-             $fname = $_POST['fname'];
-        }
-    }
+$fname = $lname = $email = $message = '';
+$error = array();
+$dataPerson = array();
 
-    //lname validation
-    if(isset($_POST['lname'])){
-        if(trim($_POST['lname'])==''){
-            $error['lname'] = "Uzupełnij nazwisko!";
-        }else{
-            $lname = $_POST['lname'];
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    function test_input($data) {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
         }
-    }
+
+    $fname = test_input($_POST["fname"]);
+    $lname = test_input($_POST["lname"]);
+    $email = test_input($_POST["email"]);
+    $message = test_input($_POST["message"]);
+    $pregmatchName = "[^[a-zA-Z -]{3,16}$]";
+    $pregmatchLastName = "[^[a-zA-Z ,.'-]{3,25}$]";
+       
     
-    //mail validation
-    if(isset($_POST['email'])){
-        if(!validateTypes("email",$_POST['email'])){
-            $error['email'] = "Uzupełnij adres email!";
+        if($fname==''){
+            $error['fnameError'] = "Uzupełnij imię!"; 
+        }elseif(!(preg_match($pregmatchName,$fname))){
+             $error['fnameError'] = "Wpisz poprawne imię"; 
         }else{
-            $email = $_POST['email'];
+            $dataPerson['fname'] = $fname;
         }
-    }
-
-    if(isset($_POST['message'])){
-        if(trim($_POST['message'])==''){
-            $error['message'] = "Wpisz swoją opinię!";
-        }elseif(!trim($_POST['message'])==''){
-            if(strlen(trim($_POST['message']))<10){
-                $error['message'] = "Daj z siebie więcej ;)";}
+    
+        if($lname==''){
+                $error['lnameError'] = "Uzupełnij nazwisko!"; 
+            }elseif(!(preg_match($pregmatchLastName,$lname))){
+                 $error['lnameError'] = "Wpisz poprawne nazwisko"; 
+            }else{
+                $dataPerson['lname'] = $lname;
+            }
+    
+        if(!validateTypes("mail",$email)){
+            $error['emailError'] = "Uzupełnij adres email!";
         }else{
-            $message = $_POST['message'];
-
+            $dataPerson['email'] = $email;
         }
-    }
-echo json_encode($error);
+
+        if($message==''){
+            $error['messageError'] = "Wpisz swoją opinię!";
+        }elseif(strlen($message)<10){
+                $error['messageError'] = "Daj z siebie więcej ;)";}
+        else{
+            $dataPerson['message'] = $message;
+        }
+}
+echo json_encode(array('error' => $error,'dataPerson' => $dataPerson));
 ?>

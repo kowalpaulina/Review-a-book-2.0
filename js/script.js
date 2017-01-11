@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $("#opinions").load("showopinions.php");
+    console.log('ok');
     listener();
 	$.ajaxSetup({
       cache:false
@@ -15,10 +16,10 @@ function listener(){
 
 function validate(){
     var valid = 0;
-    var fname = escape($("#fname").val());
-    var lname = escape($("#lname").val());
-    var email = escape($("#email").val());
-    var message = escape($("#message").val());
+    var fname =$("#fname").val();
+    var lname = $("#lname").val();
+    var email = $("#email").val();
+    var message = $("#message").val();
     $('.error p').remove();    
 $.ajax({
         type:"POST",
@@ -27,44 +28,45 @@ $.ajax({
         url:"validate.php",
         data:{fname:fname,lname:lname,email:email, message:message}
     }).done(function(data){  
-    if(data.fname){
-            $('.error-fname').append("<p>" + data.fname + "</p>");
+    if(data.error.fnameError){
+            $('.error-fname').append("<p>" + data.error.fnameError + "</p>");
             $('.error-fname').css('display', 'block');
             valid+=1;
         }
-    if(data.lname){
-            $('.error-lname').append("<p>" + data.lname + "</p>");
+    if(data.error.lnameError){
+            $('.error-lname').append("<p>" + data.error.lnameError + "</p>");
             $('.error-lname').css('display', 'block');
             valid+=1;
         };
     
-    if(data.email){
-            $('.error-email').append("<p>" + data.email + "</p>");
+    if(data.error.emailError){
+            $('.error-email').append("<p>" + data.error.emailError + "</p>");
             $('.error-email').css('display', 'block');
             valid+=1;
         };
     
-    if(data.message){
-        $('.error-message').append("<p>" + data.message + "</p>");
+    if(data.error.messageError){
+        console.log(data.messageError);
+        $('.error-message').append("<p>" + data.error.messageError + "</p>");
             $('.error-message').css('display', 'block');
             valid+=1;
         };
     
+    var fname = data.dataPerson.fname;
+    var lname = data.dataPerson.lname;
+    var email = data.dataPerson.email;
+    var message = data.dataPerson.message;
+    
      if(valid===0){
-        addOpinionToDB();
-    }
-});}
+        addOpinionToDB(fname,lname,email,message);
+     }
+    });
+}
 
-
-function addOpinionToDB(){
+function addOpinionToDB(fname,lname,email,message){
     request = "";
     request = new XMLHttpRequest();
     request.msCaching = 'enabled';
-    var fname = escape($("#fname").val());
-    var lname = escape($("#lname").val());
-    var email = escape($("#email").val());
-    var gender = escape($("#gender").val());
-    var message = escape($("#message").val());
     var url = "addopinion.php";
     var content = "fname=" + fname + "&lname=" + lname + "&email=" +email + "&message=" + message;  
     request.onreadystatechange = contentAdd;
